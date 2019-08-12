@@ -9,7 +9,7 @@
 import UIKit
 
 // MARK: - KoyomiDelegate -
-@objc public protocol KoyomiDelegate: class {
+public protocol KoyomiDelegate: class {
     /**
      Tells the delegate that the date at the specified index path was selected.
      
@@ -17,7 +17,7 @@ import UIKit
      - Parameter date:      The date of the cell that was selected.
      - Parameter indexPath: The index path of the cell that was selected.
      */
-    @objc optional func koyomi(_ koyomi: Koyomi, didSelect date: Date?, forItemAt indexPath: IndexPath)
+    func koyomi(_ koyomi: Koyomi, didSelect date: Date?, forItemAt indexPath: IndexPath)
     
     /**
      Tells the delegate that the displayed month is changed.
@@ -25,7 +25,7 @@ import UIKit
      - Parameter koyomi:     The current Koyomi instance.
      - Parameter dateString: The current date string.
      */
-    @objc optional func koyomi(_ koyomi: Koyomi, currentDateString dateString: String)
+    func koyomi(_ koyomi: Koyomi, currentDateString dateString: String)
     
     /**
      The koyomi calls this method before select days
@@ -37,7 +37,7 @@ import UIKit
      
      - Returns: true if the item should be selected or false if it should not.
      */
-    @objc optional func koyomi(_ koyomi: Koyomi, shouldSelectDates date: Date?, to toDate: Date?, withPeriodLength length: Int) -> Bool
+    func koyomi(_ koyomi: Koyomi, shouldSelectDates date: Date?, to toDate: Date?, withPeriodLength length: Int) -> Bool
     
     /**
      Returns selection color for individual cells.
@@ -48,7 +48,7 @@ import UIKit
      
      - Returns: A color for selection background for item at the `indexPath` or nil for default selection color.
      */
-    @objc optional func koyomi(_ koyomi: Koyomi, selectionColorForItemAt indexPath: IndexPath, date: Date) -> UIColor?
+    func koyomi(_ koyomi: Koyomi, selectionColorForItemAt indexPath: IndexPath, date: Date) -> UIColor?
     
     /**
      Returns selection text color for individual cells.
@@ -59,7 +59,7 @@ import UIKit
      
      - Returns: A text color for the label for item at the `indexPath` or nil for default selection color.
      */
-    @objc optional func koyomi(_ koyomi: Koyomi, selectionTextColorForItemAt indexPath: IndexPath, date: Date) -> UIColor?
+    func koyomi(_ koyomi: Koyomi, selectionTextColorForItemAt indexPath: IndexPath, date: Date) -> UIColor?
     
     /**
      Returns font for individual cells.
@@ -70,7 +70,7 @@ import UIKit
      
      - Returns: A font for item at the indexPath or nil for default font.
      */
-    @objc optional func koyomi(_ koyomi: Koyomi, fontForItemAt indexPath: IndexPath, date: Date) -> UIFont?
+    func koyomi(_ koyomi: Koyomi, fontForItemAt indexPath: IndexPath, date: Date) -> UIFont?
     
 }
 
@@ -318,7 +318,7 @@ final public class Koyomi: UICollectionView {
     public func display(in month: MonthType) {
         model.display(in: month)
         reloadData()
-        calendarDelegate?.koyomi?(self, currentDateString: model.dateString(in: .current, withFormat: currentDateFormat))
+        calendarDelegate?.koyomi(self, currentDateString: model.dateString(in: .current, withFormat: currentDateFormat))
     }
     
     @discardableResult
@@ -502,7 +502,7 @@ private extension Koyomi {
             }()
             
             backgroundColor = model.isHighlighted(with: indexPath) ? highlightedDayBackgrondColor : dayBackgrondColor
-            font    = calendarDelegate?.koyomi?(self, fontForItemAt: indexPath, date: date) ?? dayLabelFont
+            font    = calendarDelegate?.koyomi(self, fontForItemAt: indexPath, date: date) ?? dayLabelFont
             content = model.dayString(at: indexPath, isHiddenOtherMonth: isHiddenOtherMonth)
             postion = dayPosition
         }
@@ -511,7 +511,7 @@ private extension Koyomi {
         cell.content   = content
         cell.textColor = {
             if isSelected {
-                return calendarDelegate?.koyomi?(self, selectionTextColorForItemAt: indexPath, date: date) ?? textColor
+                return calendarDelegate?.koyomi(self, selectionTextColorForItemAt: indexPath, date: date) ?? textColor
             } else {
                 return textColor
             }
@@ -520,7 +520,7 @@ private extension Koyomi {
         cell.circularViewDiameter = circularViewDiameter
         let selectionColor: UIColor = {
             if isSelected {
-                return calendarDelegate?.koyomi?(self, selectionColorForItemAt: indexPath, date: date) ?? selectedStyleColor
+                return calendarDelegate?.koyomi(self, selectionColorForItemAt: indexPath, date: date) ?? selectedStyleColor
             } else {
                 return selectedStyleColor
             }
@@ -568,14 +568,14 @@ extension Koyomi: UICollectionViewDelegate {
         case .none: return
         }
         
-        if calendarDelegate?.koyomi?(self, shouldSelectDates: date, to: toDate, withPeriodLength: length) == false {
+        if calendarDelegate?.koyomi(self, shouldSelectDates: date, to: toDate, withPeriodLength: length) == false {
             return
         }
         
         model.select(with: indexPath)
         reloadData()
         
-        calendarDelegate?.koyomi?(self, didSelect: date, forItemAt: indexPath)
+        calendarDelegate?.koyomi(self, didSelect: date, forItemAt: indexPath)
     }
 }
 
