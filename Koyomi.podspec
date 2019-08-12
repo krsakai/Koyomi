@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Koyomi'
-  s.version          = '1.2.7'
+  s.version          = '1.3'
   s.summary          = 'Simple customizable calendar component in Swift'
   s.description      = <<-DESC
 
@@ -20,19 +20,22 @@ Pod::Spec.new do |s|
                         * Support @IBDesignable and @IBInspectable
                         * Support Swift 2.3
                         * Support Swift 3.0
+                        * Upgraded to Swift 5.0
                         * Compatible with Carthage
 
                         Koyomi is designed to be easy to use!!
 
+                        [Edited by Rob Wilson]
+
                         DESC
 
-  s.homepage         = 'https://github.com/shoheiyokoyama/Koyomi'
+  s.homepage         = 'https://github.com/robwilson195/Koyomi'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'shoheiyokoyama' => 'shohei.yok0602@gmail.com' }
-  s.source           = { :git => 'https://github.com/shoheiyokoyama/Koyomi.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/robwilson195/Koyomi.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '11.0'
 
   s.source_files = 'Koyomi/**/*.swift'
 end

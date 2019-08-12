@@ -315,7 +315,7 @@ private extension DateModel {
         guard let indexAtBeginning = indexAtBeginning(in: .current) else { return }
 
         var components: DateComponents = .init()
-        currentDates = (0..<DateModel.maxCellCount).flatMap { index in
+        currentDates = (0..<DateModel.maxCellCount).compactMap { index in
                 components.day = index - indexAtBeginning
                 return calendar.date(byAdding: components, to: atBeginning(of: .current))
             }
