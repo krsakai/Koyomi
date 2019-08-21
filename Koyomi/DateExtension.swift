@@ -12,6 +12,7 @@ extension Date {
     func formated(withFormat format: String = "yyyy/MM/dd") -> Date? {
         let formatter: DateFormatter = .init()
         formatter.dateFormat = format
+        formatter.locale = Locale.current
         let dateString = formatter.string(from: self)
         return formatter.date(from: dateString)
     }
