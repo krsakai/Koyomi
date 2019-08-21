@@ -87,7 +87,7 @@ final class DateModel: NSObject {
         }
         let formatter: DateFormatter = .init()
         formatter.dateFormat = "d"
-        formatter.locale = Locale.current
+        formatter.timeZone = .current
         return formatter.string(from: currentDates[indexPath.row])
     }
     
@@ -108,7 +108,7 @@ final class DateModel: NSObject {
     func dateString(in month: MonthType, withFormat format: String) -> String {
         let formatter: DateFormatter = .init()
         formatter.dateFormat = format
-        formatter.locale = Locale.current
+        formatter.timeZone = .current
         return formatter.string(from: date(of: month))
     }
     
