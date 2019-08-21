@@ -314,7 +314,11 @@ final class DateModel: NSObject {
 // MARK: - Private Methods -
 
 private extension DateModel {
-    var calendar: Calendar { return Calendar.current }
+    var calendar: Calendar {
+        var temp = Calendar.current
+        temp.timeZone = TimeZone(identifier: "Europe/London")!
+        return temp
+    }
     
     func setup() {
         selectedDates = [:]
