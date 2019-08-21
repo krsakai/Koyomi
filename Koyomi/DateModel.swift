@@ -23,7 +23,9 @@ final class DateModel: NSObject {
         case monday, tuesday, wednesday, thursday, friday, saturday, sunday
 
         init?(_ indexPath: IndexPath) {
-            let firstWeekday = Calendar.current.firstWeekday
+            var calendar = Calendar.current
+            calendar.timeZone = TimeZone(identifier: "Europe/London")!
+            let firstWeekday = calendar.firstWeekday
             switch indexPath.row % 7 {
             case (8 -  firstWeekday) % 7:  self = .sunday
             case (9 -  firstWeekday) % 7:  self = .monday
