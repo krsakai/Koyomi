@@ -20,7 +20,6 @@ extension Date {
     func daysSince(_ anotherDate: Date) -> Int? {
         if let fromDate = dateFromComponents(self), let toDate = dateFromComponents(anotherDate) {
             let components = Calendar.current.dateComponents([.day], from: fromDate, to: toDate)
-            components.timeZone = TimeZone(identifier: "Europe/London")
             return components.day
         }
         return nil
@@ -29,7 +28,6 @@ extension Date {
     private func dateFromComponents(_ date: Date) -> Date? {
         let calender   = Calendar.current
         let components = calender.dateComponents([.year, .month, .day], from: date)
-        components.timeZone = TimeZone(identifier: "Europe/London")
         return calender.date(from: components)
     }
 }
