@@ -53,6 +53,8 @@ final class DateModel: NSObject {
     
     override init() {
         super.init()
+        
+        NSTimeZone.default = TimeZone(abbreviation: "BST")!
         setup()
     }
     
