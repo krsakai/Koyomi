@@ -71,7 +71,7 @@ final class DateModel: NSObject {
     
     func indexAtBeginning(in month: MonthType) -> Int? {
         if let index = calendar.ordinality(of: .day, in: .weekOfMonth, for: atBeginning(of: month)) {
-            return index
+            return index + 1
         }
         return nil
     }
