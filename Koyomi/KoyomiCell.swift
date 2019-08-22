@@ -101,41 +101,48 @@ final class KoyomiCell: UICollectionViewCell {
             leftSemicircleView.isHidden  = true
             
         // isSelected is always true
-        case .semicircleEdge(let position):
-            lineView.isHidden = true
-            circularView.isHidden = true
+        case .semicircleEdge(let _):
+            circularView.backgroundColor = color
+            self.backgroundColor = backgroundColor
             
-            if case .left = position {
-                rightSemicircleView.isHidden = false
-                leftSemicircleView.isHidden  = false
-                self.backgroundColor = backgroundColor
-                
-                leftSemicircleView.backgroundColor  = color
-                rightSemicircleView.backgroundColor = color
-                
-                // for bug: unnecessary line
-                leftSemicircleView.frame.size.width = bounds.width / 2 + 1
-                
-                leftSemicircleView.mask(with: .left)
-                rightSemicircleView.mask(with: .none)
-            } else if case .middle = position {
-                rightSemicircleView.isHidden = true
-                leftSemicircleView.isHidden  = true
-                self.backgroundColor = color
-                
-                leftSemicircleView.frame.size.width = bounds.width / 2
-                
-            } else if case .right = position {
-                rightSemicircleView.isHidden = false
-                leftSemicircleView.isHidden  = false
-                self.backgroundColor = backgroundColor
-                
-                leftSemicircleView.backgroundColor  = color
-                rightSemicircleView.backgroundColor = color
-                
-                leftSemicircleView.mask(with: .none)
-                rightSemicircleView.mask(with: .right)
-            }
+            circularView.isHidden  = false
+            lineView.isHidden = true
+            rightSemicircleView.isHidden = true
+            leftSemicircleView.isHidden  = true
+//            lineView.isHidden = true
+//            circularView.isHidden = true
+//
+//            if case .left = position {
+//                rightSemicircleView.isHidden = false
+//                leftSemicircleView.isHidden  = false
+//                self.backgroundColor = backgroundColor
+//
+//                leftSemicircleView.backgroundColor  = color
+//                rightSemicircleView.backgroundColor = color
+//
+//                // for bug: unnecessary line
+//                leftSemicircleView.frame.size.width = bounds.width / 2 + 1
+//
+//                leftSemicircleView.mask(with: .left)
+//                rightSemicircleView.mask(with: .none)
+//            } else if case .middle = position {
+//                rightSemicircleView.isHidden = true
+//                leftSemicircleView.isHidden  = true
+//                self.backgroundColor = color
+//
+//                leftSemicircleView.frame.size.width = bounds.width / 2
+//
+//            } else if case .right = position {
+//                rightSemicircleView.isHidden = false
+//                leftSemicircleView.isHidden  = false
+//                self.backgroundColor = backgroundColor
+//
+//                leftSemicircleView.backgroundColor  = color
+//                rightSemicircleView.backgroundColor = color
+//
+//                leftSemicircleView.mask(with: .none)
+//                rightSemicircleView.mask(with: .right)
+//            }
             
         case .line(let position):
             rightSemicircleView.isHidden = true
