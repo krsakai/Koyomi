@@ -95,10 +95,6 @@ final class KoyomiCell: UICollectionViewCell {
             circularView.backgroundColor = color
             self.backgroundColor = backgroundColor
             
-            if isSelected {
-                self.backgroundColor = .black
-            }
-            
             circularView.isHidden  = false
             lineView.isHidden = true
             rightSemicircleView.isHidden = true
