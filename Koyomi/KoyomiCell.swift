@@ -215,8 +215,8 @@ private extension KoyomiCell {
         contentLabel.sizeToFit()
         contentLabel.frame.origin = postion
         let diameter = bounds.width * circularViewDiameter
-        rightSemicircleView.frame = CGRect(x: (bounds.width - diameter) / 2, y: (bounds.height - diameter) / 2, width: diameter, height: diameter)
-        leftSemicircleView.frame  = CGRect(x: (bounds.width - diameter) / 2, y: (bounds.height - diameter) / 2, width: diameter, height: diameter)
+        rightSemicircleView.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
+        leftSemicircleView.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
         rightSemicircleView.layer.cornerRadius = diameter / 2
         leftSemicircleView.layer.cornerRadius = diameter / 2
     }
