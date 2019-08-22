@@ -27,13 +27,13 @@ final class DateModel: NSObject {
             calendar.timeZone = TimeZone(identifier: "Europe/London")!
             let firstWeekday = calendar.firstWeekday
             switch indexPath.row % 7 {
-            case (8 -  firstWeekday) % 7:  self = .sunday
-            case (9 -  firstWeekday) % 7:  self = .monday
-            case (10 - firstWeekday) % 7:  self = .tuesday
-            case (11 - firstWeekday) % 7:  self = .wednesday
-            case (12 - firstWeekday) % 7:  self = .thursday
-            case (13 - firstWeekday) % 7:  self = .friday
-            case (14 - firstWeekday) % 7:  self = .saturday
+            case (8 -  firstWeekday) % 7:  self = .monday
+            case (9 -  firstWeekday) % 7:  self = .tuesday
+            case (10 - firstWeekday) % 7:  self = .wednesday
+            case (11 - firstWeekday) % 7:  self = .thursday
+            case (12 - firstWeekday) % 7:  self = .friday
+            case (13 - firstWeekday) % 7:  self = .saturday
+            case (14 - firstWeekday) % 7:  self = .sunday
             default: return nil
             }
         }
