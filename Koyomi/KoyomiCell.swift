@@ -95,6 +95,10 @@ final class KoyomiCell: UICollectionViewCell {
             circularView.backgroundColor = color
             self.backgroundColor = backgroundColor
             
+            if isSelected {
+                self.backgroundColor = .black
+            }
+            
             circularView.isHidden  = false
             lineView.isHidden = true
             rightSemicircleView.isHidden = true
@@ -104,37 +108,37 @@ final class KoyomiCell: UICollectionViewCell {
         case .semicircleEdge(let position):
             lineView.isHidden = true
             circularView.isHidden = true
-
+            
             if case .left = position {
-//                rightSemicircleView.isHidden = true
+                rightSemicircleView.isHidden = false
                 leftSemicircleView.isHidden  = false
                 self.backgroundColor = backgroundColor
-
+                
                 leftSemicircleView.backgroundColor  = color
-//                rightSemicircleView.backgroundColor = color
-//
-//                // for bug: unnecessary line
-//                leftSemicircleView.frame.size.width = bounds.width / 2 + 1
-//
-//                leftSemicircleView.mask(with: .left)
-//                rightSemicircleView.mask(with: .none)
+                rightSemicircleView.backgroundColor = color
+                
+                // for bug: unnecessary line
+                leftSemicircleView.frame.size.width = bounds.width / 2 + 1
+                
+                leftSemicircleView.mask(with: .left)
+                rightSemicircleView.mask(with: .none)
             } else if case .middle = position {
                 rightSemicircleView.isHidden = true
                 leftSemicircleView.isHidden  = true
                 self.backgroundColor = color
-
-//                leftSemicircleView.frame.size.width = bounds.width / 2
-
+                
+                leftSemicircleView.frame.size.width = bounds.width / 2
+                
             } else if case .right = position {
                 rightSemicircleView.isHidden = false
-//                leftSemicircleView.isHidden  = false
+                leftSemicircleView.isHidden  = false
                 self.backgroundColor = backgroundColor
-
-//                leftSemicircleView.backgroundColor  = color
+                
+                leftSemicircleView.backgroundColor  = color
                 rightSemicircleView.backgroundColor = color
-
-//                leftSemicircleView.mask(with: .none)
-//                rightSemicircleView.mask(with: .right)
+                
+                leftSemicircleView.mask(with: .none)
+                rightSemicircleView.mask(with: .right)
             }
             
         case .line(let position):
@@ -195,11 +199,11 @@ private extension KoyomiCell {
         circularView.isHidden = true
         addSubview(circularView)
         
-        leftSemicircleView.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
+        leftSemicircleView.frame = CGRect(x: 0, y: 0, width: bounds.width / 2, height: bounds.height)
         leftSemicircleView.isHidden = true
         addSubview(leftSemicircleView)
         
-        rightSemicircleView.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
+        rightSemicircleView.frame = CGRect(x: bounds.width / 2, y: 0, width: bounds.width / 2, height: bounds.height)
         rightSemicircleView.isHidden = true
         addSubview(rightSemicircleView)
         
@@ -214,11 +218,9 @@ private extension KoyomiCell {
     func adjustSubViewsFrame() {
         contentLabel.sizeToFit()
         contentLabel.frame.origin = postion
-        let diameter = bounds.width * circularViewDiameter
-        rightSemicircleView.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
-        leftSemicircleView.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
-        rightSemicircleView.layer.cornerRadius = diameter / 2
-        leftSemicircleView.layer.cornerRadius = diameter / 2
+        
+        rightSemicircleView.frame = CGRect(x: bounds.width / 2, y: 0, width: bounds.width / 2, height: bounds.height)
+        leftSemicircleView.frame  = CGRect(x: 0, y: 0, width: bounds.width / 2, height: bounds.height)
     }
     
     func configureCircularView() {
