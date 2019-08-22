@@ -50,8 +50,8 @@ public protocol KoyomiDelegate: class {
      */
     func koyomi(_ koyomi: Koyomi, selectionColorForItemAt indexPath: IndexPath, date: Date) -> UIColor?
     
-    
     func koyomi(_ koyomi: Koyomi, selectionBackgroundColorForItemAt indexPath: IndexPath, date: Date) -> UIColor?
+    
     /**
      Returns selection text color for individual cells.
      
@@ -503,13 +503,7 @@ private extension Koyomi {
                 }
             }()
             
-            backgroundColor = {
-                if isSelected {
-                    return calendarDelegate?.koyomi(self, selectionBackgroundColorForItemAt: indexPath, date: date) ?? UIColor.white
-                } else {
-                    return UIColor.white
-                }
-            }()
+            backgroundColor = model.isHighlighted(with: indexPath) ? highlightedDayBackgrondColor : dayBackgrondColor
             font    = calendarDelegate?.koyomi(self, fontForItemAt: indexPath, date: date) ?? dayLabelFont
             content = model.dayString(at: indexPath, isHiddenOtherMonth: isHiddenOtherMonth)
             postion = dayPosition
@@ -542,6 +536,14 @@ private extension Koyomi {
         }
         
         cell.configureAppearanse(of: style, withColor: selectionColor, backgroundColor: backgroundColor, isSelected: isSelected)
+        
+        cell.backgroundColor = {
+            if isSelected {
+                return calendarDelegate?.koyomi(self, selectionBackgroundColorForItemAt: indexPath, date: date) ?? UIColor.white
+            } else {
+                return UIColor.white
+            }
+        }()
     }
 }
 
