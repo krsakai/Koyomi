@@ -106,12 +106,12 @@ final class KoyomiCell: UICollectionViewCell {
             circularView.isHidden = true
 
             if case .left = position {
-                rightSemicircleView.isHidden = true
+//                rightSemicircleView.isHidden = true
                 leftSemicircleView.isHidden  = false
                 self.backgroundColor = backgroundColor
 
                 leftSemicircleView.backgroundColor  = color
-                rightSemicircleView.backgroundColor = color
+//                rightSemicircleView.backgroundColor = color
 //
 //                // for bug: unnecessary line
 //                leftSemicircleView.frame.size.width = bounds.width / 2 + 1
@@ -123,14 +123,14 @@ final class KoyomiCell: UICollectionViewCell {
                 leftSemicircleView.isHidden  = true
                 self.backgroundColor = color
 
-                leftSemicircleView.frame.size.width = bounds.width / 2
+//                leftSemicircleView.frame.size.width = bounds.width / 2
 
             } else if case .right = position {
                 rightSemicircleView.isHidden = false
-                leftSemicircleView.isHidden  = false
+//                leftSemicircleView.isHidden  = false
                 self.backgroundColor = backgroundColor
 
-                leftSemicircleView.backgroundColor  = color
+//                leftSemicircleView.backgroundColor  = color
                 rightSemicircleView.backgroundColor = color
 
 //                leftSemicircleView.mask(with: .none)
