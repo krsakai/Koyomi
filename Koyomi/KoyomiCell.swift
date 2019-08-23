@@ -133,6 +133,9 @@ final class KoyomiCell: UICollectionViewCell {
                 leftSemicircleView.backgroundColor  = color
                 rightSemicircleView.backgroundColor = color
                 
+                // for bug: unnecessary line
+                rightSemicircleView.frame.size.width = bounds.width / 2 + 1
+                
                 leftSemicircleView.mask(with: .none)
                 rightSemicircleView.mask(with: .right)
             }

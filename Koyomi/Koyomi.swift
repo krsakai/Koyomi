@@ -50,8 +50,6 @@ public protocol KoyomiDelegate: class {
      */
     func koyomi(_ koyomi: Koyomi, selectionColorForItemAt indexPath: IndexPath, date: Date) -> UIColor?
     
-    func koyomi(_ koyomi: Koyomi, selectionBackgroundColorForItemAt indexPath: IndexPath, date: Date) -> UIColor?
-    
     /**
      Returns selection text color for individual cells.
      
@@ -536,14 +534,6 @@ private extension Koyomi {
         }
         
         cell.configureAppearanse(of: style, withColor: selectionColor, backgroundColor: backgroundColor, isSelected: isSelected)
-        
-        cell.backgroundColor = {
-            if isSelected {
-                return calendarDelegate?.koyomi(self, selectionBackgroundColorForItemAt: indexPath, date: date) ?? UIColor.white
-            } else {
-                return UIColor.white
-            }
-        }()
     }
 }
 
