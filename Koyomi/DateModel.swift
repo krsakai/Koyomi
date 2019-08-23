@@ -23,7 +23,9 @@ final class DateModel: NSObject {
         case monday, tuesday, wednesday, thursday, friday, saturday, sunday
 
         init?(_ indexPath: IndexPath) {
-            let firstWeekday = Calendar.current.firstWeekday
+            var calendar = Calendar.current
+            calendar.timeZone = TimeZone.init(identifier: "Europe/London")!
+            let firstWeekday = calendar.firstWeekday
             switch indexPath.row % 7 {
             case (8 -  firstWeekday) % 7:  self = .sunday
             case (9 -  firstWeekday) % 7:  self = .monday
@@ -53,6 +55,7 @@ final class DateModel: NSObject {
     
     override init() {
         super.init()
+        
         setup()
     }
     
@@ -87,6 +90,7 @@ final class DateModel: NSObject {
         }
         let formatter: DateFormatter = .init()
         formatter.dateFormat = "d"
+        formatter.timeZone = TimeZone.init(identifier: "Europe/London")!
         return formatter.string(from: currentDates[indexPath.row])
     }
     
@@ -107,6 +111,7 @@ final class DateModel: NSObject {
     func dateString(in month: MonthType, withFormat format: String) -> String {
         let formatter: DateFormatter = .init()
         formatter.dateFormat = format
+        formatter.timeZone = TimeZone.init(identifier: "Europe/London")!
         return formatter.string(from: date(of: month))
     }
     
@@ -194,6 +199,7 @@ final class DateModel: NSObject {
                 
                 var date = start
                 var components: DateComponents = .init()
+                components.timeZone = TimeZone.init(identifier: "Europe/London")!
                 while selectedDate.compare(date) == result {
                     components.day = componentDay
                     
@@ -274,6 +280,7 @@ final class DateModel: NSObject {
             
             var date = fromDate
             var components: DateComponents = .init()
+            components.timeZone = TimeZone.init(identifier: "Europe/London")!
             
             while toDate.compare(date) == result {
                 components.day = componentDay
@@ -307,7 +314,11 @@ final class DateModel: NSObject {
 // MARK: - Private Methods -
 
 private extension DateModel {
-    var calendar: Calendar { return Calendar.current }
+    var calendar: Calendar {
+        var temp = Calendar.current
+        temp.timeZone = TimeZone.init(identifier: "Europe/London")!
+        return temp
+    }
     
     func setup() {
         selectedDates = [:]
@@ -315,6 +326,7 @@ private extension DateModel {
         guard let indexAtBeginning = indexAtBeginning(in: .current) else { return }
 
         var components: DateComponents = .init()
+        components.timeZone = TimeZone.init(identifier: "Europe/London")
         currentDates = (0..<DateModel.maxCellCount).compactMap { index in
                 components.day = index - indexAtBeginning
                 return calendar.date(byAdding: components, to: atBeginning(of: .current))
@@ -336,12 +348,14 @@ private extension DateModel {
     
     func atBeginning(of month: MonthType) -> Date {
         var components = calendar.dateComponents([.year, .month, .day], from: date(of: month))
+        components.timeZone = TimeZone.init(identifier: "Europe/London")
         components.day = 1
         return calendar.date(from: components) ?? Date()
     }
     
     func date(of month: MonthType) -> Date {
         var components = DateComponents()
+        components.timeZone = TimeZone.init(identifier: "Europe/London")
         components.month = {
             switch month {
             case .previous: return -1
