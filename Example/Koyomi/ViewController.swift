@@ -231,8 +231,20 @@ extension ViewController {
 // MARK: - KoyomiDelegate -
 
 extension ViewController: KoyomiDelegate {
+    func koyomi(_ koyomi: Koyomi, selectionColorForItemAt indexPath: IndexPath, date: Date) -> UIColor? {
+        UIColor.red
+    }
+    
+    func koyomi(_ koyomi: Koyomi, selectionTextColorForItemAt indexPath: IndexPath, date: Date) -> UIColor? {
+        UIColor.red
+    }
+    
+    func koyomi(_ koyomi: Koyomi, fontForItemAt indexPath: IndexPath, date: Date) -> UIFont? {
+        UIFont(name: "", size: 16)
+    }
+    
     func koyomi(_ koyomi: Koyomi, didSelect date: Date?, forItemAt indexPath: IndexPath) {
-        print("You Selected: \(date)")
+        print("You Selected: \(String(describing: date))")
     }
     
     func koyomi(_ koyomi: Koyomi, currentDateString dateString: String) {
