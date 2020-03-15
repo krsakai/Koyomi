@@ -108,6 +108,12 @@ final class DateModel: NSObject {
         setup()
     }
     
+    func display(date: Date) {
+        currentDates = []
+        currentDate = date
+        setup()
+    }
+    
     func dateString(in month: MonthType, withFormat format: String) -> String {
         let formatter: DateFormatter = .init()
         formatter.dateFormat = format
