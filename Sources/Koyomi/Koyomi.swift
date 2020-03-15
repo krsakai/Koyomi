@@ -321,6 +321,12 @@ final public class Koyomi: UICollectionView {
         calendarDelegate?.koyomi(self, currentDateString: model.dateString(in: .current, withFormat: currentDateFormat))
     }
     
+    public func display(date: Date) {
+        model.display(date: date)
+        reloadData()
+        calendarDelegate?.koyomi(self, currentDateString: model.dateString(in: .current, withFormat: currentDateFormat))
+    }
+    
     @discardableResult
     public func setDayFont(fontName name: String = ".SFUIText-Medium", size: CGFloat) -> Self {
         dayLabelFont = UIFont(name: name, size: size)
